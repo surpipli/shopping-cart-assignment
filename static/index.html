@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabka Bazaar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" , href="./dist/main.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./dist/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a class="header-logo" href="/"
+          ><img
+            class="logo"
+            src="./public/images/logo_2x.png"
+            alt="sabka bazaar logo"
+        /></a>
+        <nav class="navigation">
+          <ul class="main-navigation">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li>
+              <a href="/products" class="nav-link">Products</a>
+            </li>
+          </ul>
+
+          <div class="sub-navigation">
+            <ul class="sub-navigation-list">
+              <li>
+                <a class="sub-nav-link mr-right-sm" href="/login">Signin</a>
+              </li>
+              <li><a class="sub-nav-link" href="/register">Register</a></li>
+            </ul>
+            <button class="btn-cart">
+              <svg
+                version="1.1"
+                id="Layer_1"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 24 24"
+                class="cart-icon"
+                xml:space="preserve"
+              >
+                <path
+                  d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+                />
+              </svg>
+              <span class="item-count"></span>
+            </button>
+          </div>
+        </nav>
+        <nav class="mobile-menu">
+          <button class="btn-cart">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 24 24"
+              class="cart-icon"
+              xml:space="preserve"
+            >
+              <path
+                d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+              />
+            </svg>
+            <span class="item-count"></span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="mainContainer"></main>
+
+    <section class="add-to-cart">
+      <div class="cart-content">
+        <div class="cart-header">
+          <h3 class="cart-header-title"></h3>
+          <button class="btn-close-cart">X</button>
+        </div>
+
+        <div class="cart-items-row"></div>
+
+        <div class="cart-footer"></div>
+      </div>
+    </section>
+
+    <footer class="footer-common">
+      <div class="container">
+        <p>Copyright &copy; 2011-2023 Sabka Bazaar Grocery Supplies Pvt Ltd</p>
+      </div>
+    </footer>
+  </body>
+</html>
