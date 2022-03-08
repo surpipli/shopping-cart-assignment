@@ -43,5 +43,12 @@ const cartItemCount = () => {
   }
 };
 
+function automateSlider() {
+  setInterval(() => {
+    document.querySelector(".next-btn").click();
+  }, 2500);
+}
+
 window.addEventListener("load", router());
+window.addEventListener("load", automateSlider());
 window.addEventListener("hashchange", router());

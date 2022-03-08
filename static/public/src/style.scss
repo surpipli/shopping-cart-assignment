@@ -879,7 +879,7 @@ header {
 
   .home-page-banner .next-btn,
   .home-page-banner .prev-btn {
-    font-size: $font-size-14;
+    visibility: hidden;
   }
 
   .category-row {
