@@ -3,8 +3,6 @@ import { closeCart, showCart } from "../utility";
 const result = await axios.get("http://localhost:3000/categoriesdata");
 const banners = await axios.get("http://localhost:3000/banners");
 
-let filterResult = result.data.filter((category) => category.order >= 0);
-let sortResult = filterResult.sort((a, b) => a.order - b.order);
 const HomeScreen = {
   after_render: () => {
     sliderShow();
@@ -21,6 +19,17 @@ const HomeScreen = {
       });
   },
   render: () => {
+    if (
+      !result ||
+      result.statusText !== "OK" ||
+      !banners ||
+      banners.statusText !== "OK"
+    ) {
+      return `<div>Something went wrong</div>`;
+    }
+
+    let filterResult = result.data.filter((category) => category.order >= 0);
+    let sortResult = filterResult.sort((a, b) => a.order - b.order);
     const allcategories = sortResult;
     const allBanners = banners.data;
     return `

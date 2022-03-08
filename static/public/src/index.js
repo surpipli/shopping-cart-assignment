@@ -28,6 +28,7 @@ const router = () => {
   cartItemCount();
 };
 
+const pageUrlPath = document.location.pathname.toLowerCase();
 const cartItemCount = () => {
   let storedItems = JSON.parse(localStorage.getItem("cartItems"));
   if (storedItems !== null) {
@@ -50,5 +51,8 @@ function automateSlider() {
 }
 
 window.addEventListener("load", router());
-window.addEventListener("load", automateSlider());
 window.addEventListener("hashchange", router());
+
+if (pageUrlPath === "/") {
+  window.addEventListener("load", automateSlider());
+}

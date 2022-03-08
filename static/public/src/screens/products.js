@@ -3,9 +3,6 @@ import { addToCart, closeCart, showCart } from "../utility";
 const categories = await axios.get("http://localhost:3000/categoriesdata");
 const products = await axios.get("http://localhost:3000/productsdata");
 
-let filterResult = categories.data.filter((category) => category.order >= 0);
-let sortResult = filterResult.sort((a, b) => a.order - b.order);
-
 const ProductScreen = {
   after_render: () => {
     document
@@ -43,6 +40,19 @@ const ProductScreen = {
     });
   },
   render: () => {
+    if (
+      !categories ||
+      categories.statusText !== "OK" ||
+      !products ||
+      products.statusText !== "OK"
+    ) {
+      return `<div>Something went wrong</div>`;
+    }
+
+    let filterResult = categories.data.filter(
+      (category) => category.order >= 0
+    );
+    let sortResult = filterResult.sort((a, b) => a.order - b.order);
     const allcategories = sortResult;
     const allProducts = products.data;
     return `
