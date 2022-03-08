@@ -192,7 +192,6 @@ export const renderCartItems = () => {
 
 // change item quantity
 export const changeItemQuantity = (action, id) => {
-  console.log;
   let selectedItem = cartItems.filter((item) => item.id === id);
   if ((action === "minus") & (selectedItem[0].quantity === 1)) {
     cartItems = cartItems.filter((item) => item.id !== id);
