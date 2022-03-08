@@ -28,16 +28,8 @@ export const showCart = () => {
     bodyEl.style.overflowY = "hidden";
   }
 
-  let cartHeaderTitleEl = document.querySelector(".cart-header-title");
-  let cartItemsEl = document.querySelector(".cart-items-row");
-  let cartFooterEl = document.querySelector(".cart-footer");
   if (cartItems.length === 0) {
-    cartHeaderTitleEl.innerHTML = `My Cart`;
-    cartItemsEl.innerHTML = `<div class="no-items">
-    <h4>No items in your cart</h4>
-    <p>Your favourite items are just a click away</p>
-  </div>`;
-    cartFooterEl.innerHTML = `<a class="btn btn-start-shopping" href="/products">Start Shopping</a>`;
+    noItemsCart();
   }
 
   alignCartPosition();
@@ -50,6 +42,19 @@ export const showCart = () => {
     }
   });
 };
+
+function noItemsCart() {
+  let cartHeaderTitleEl = document.querySelector(".cart-header-title");
+  let cartItemsEl = document.querySelector(".cart-items-row");
+  let cartFooterEl = document.querySelector(".cart-footer");
+
+  cartHeaderTitleEl.innerHTML = `My Cart`;
+  cartItemsEl.innerHTML = `<div class="no-items">
+    <h4>No items in your cart</h4>
+    <p>Your favourite items are just a click away</p>
+  </div>`;
+  cartFooterEl.innerHTML = `<a class="btn btn-start-shopping" href="/products">Start Shopping</a>`;
+}
 
 // calculates popup height and position from the right
 function alignCartPosition() {
@@ -120,15 +125,7 @@ export const renderSubTotal = () => {
     totalAmount += item.price * item.quantity;
   });
 
-  let viewPortWidth = window.innerWidth;
-
-  if (viewPortWidth < 1024) {
-    let cartItemCountEl = document.querySelector(".mobile-menu .item-count");
-    cartItemCountEl.innerHTML = `${totalItems} items`;
-  }
-
-  let cartItemCountEl = document.querySelector(".item-count");
-  cartItemCountEl.innerHTML = `${totalItems} items`;
+  updateTotalItemCount(totalItems);
 
   let cartHeaderTitleEl = document.querySelector(".cart-header-title");
   cartHeaderTitleEl.innerHTML = `My Cart <span>(${totalItems} item)</span>`;
@@ -142,6 +139,17 @@ export const renderSubTotal = () => {
     </a>
   `;
 };
+
+function updateTotalItemCount(totalItems) {
+  let viewPortWidth = window.innerWidth;
+  if (viewPortWidth < 1024) {
+    let cartItemCountEl = document.querySelector(".mobile-menu .item-count");
+    cartItemCountEl.innerHTML = `${totalItems} items`;
+  }
+
+  let cartItemCountEl = document.querySelector(".item-count");
+  cartItemCountEl.innerHTML = `${totalItems} items`;
+}
 
 // render cart items in the cart
 export const renderCartItems = () => {
@@ -184,19 +192,31 @@ export const renderCartItems = () => {
 
 // change item quantity
 export const changeItemQuantity = (action, id) => {
-  cartItems = cartItems.map((item) => {
-    let quantity = item.quantity;
-    if (item.id === id) {
-      if (action === "minus" && quantity > 1) {
-        quantity--;
-      } else if (action === "plus" && quantity < item.stock) {
-        quantity++;
-      }
+  console.log;
+  let selectedItem = cartItems.filter((item) => item.id === id);
+  if ((action === "minus") & (selectedItem[0].quantity === 1)) {
+    cartItems = cartItems.filter((item) => item.id !== id);
+    if (cartItems.length === 0) {
+      noItemsCart();
+      updateTotalItemCount(cartItems.length);
+    } else {
+      updateCart();
     }
+  } else {
+    cartItems = cartItems.map((item) => {
+      let quantity = item.quantity;
+      if (item.id === id) {
+        if (action === "minus" && quantity > 1) {
+          quantity--;
+        } else if (action === "plus" && quantity < item.stock) {
+          quantity++;
+        }
+      }
 
-    return { ...item, quantity };
-  });
-  updateCart();
+      return { ...item, quantity };
+    });
+    updateCart();
+  }
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 
